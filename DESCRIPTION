@@ -1,16 +1,30 @@
 Package: fluxcleanr
-Title: What the Package Does (One Line, Title Case)
+Title: Clean FLUXNET2015 Data for Model Calibration
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Colin",
+           family = "Brust",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
+           email = "colin.brust@gmail.com",
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+Description: Countless academic papers use data from the FLUXNET2015 dataset to 
+  calibrate and validate their gross primary production and evapotranspiration
+  models. Unfortunately, there is no common framework for aggregating and
+  cleaning these data, meaning methods across papers may be inconsistent. This
+  package cleans, gap fills and filters latent heat flux and GPP data from
+  the FLUXNET2015 dataset to provide a consistent framework for ET and GPP model
+  calibration and validation.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+Imports: 
+    dplyr,
+    lubridate,
+    magrittr,
+    readr,
+    rlang
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
