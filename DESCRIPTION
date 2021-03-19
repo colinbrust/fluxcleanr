@@ -5,8 +5,7 @@ Authors@R:
     person(given = "Colin",
            family = "Brust",
            role = c("aut", "cre"),
-           email = "colin.brust@gmail.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+           email = "colin.brust@gmail.com")
 Description: Countless academic papers use data from the FLUXNET2015 dataset to
   calibrate and validate their gross primary production and evapotranspiration 
   models. Unfortunately, there is no common framework for aggregating and

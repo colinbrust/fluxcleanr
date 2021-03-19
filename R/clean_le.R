@@ -14,9 +14,7 @@ clean_le <- function(f) {
   f %>%
     readr::read_csv(col_types = readr::cols()) %>%
     dplyr::filter(
-      .data$LE_F_MDS_QC %in% c(0, 1),
-      .data$LE_CORR_25 != -9999,
-      .data$LE_CORR_75 != -9999
+      .data$LE_F_MDS_QC %in% c(0, 1)
     ) %>%
     dplyr::mutate(
       date = paste0(as.character(.data$TIMESTAMP_START), '00'),
