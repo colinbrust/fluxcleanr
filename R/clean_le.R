@@ -13,6 +13,7 @@ clean_le <- function(f) {
 
   f %>%
     readr::read_csv(col_types = readr::cols()) %>%
+    # Filter out low quality data
     dplyr::filter(
       .data$LE_F_MDS_QC %in% c(0, 1)
     ) %>%
