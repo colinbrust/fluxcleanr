@@ -11,7 +11,7 @@
 #' @examples
 #' # Add acual example with dummy data
 #' sum(1, 2)
-filter_le <- function(dat, hh=TRUE) {
+filter_le <- function(dat, hh=TRUE, avg_daily=TRUE) {
 
   tmp <- dat %>%
     dplyr::na_if(-9999) %>%
@@ -27,6 +27,8 @@ filter_le <- function(dat, hh=TRUE) {
     # Following Zhang et al. (2019), remove days with more than 6 hours missing.
     dplyr::filter(na_count >= ifelse(hh, 36, 6))
 
+  if (nrow(tmp) == 0) {return(NULL)}
+
   date_tbl <- tibble::tibble(
     date =seq(range(tmp$date)[1], range(tmp$date)[2], by='30 min')
   )
@@ -40,13 +42,18 @@ filter_le <- function(dat, hh=TRUE) {
   joined$LE_CORR_25 <- zoo::na.approx(joined$LE_CORR_25, maxgap = gap, rule=2)
   joined$LE_CORR_75 <- zoo::na.approx(joined$LE_CORR_75, maxgap = gap, rule=2)
 
-  joined %>%
-    dplyr::group_by(day) %>%
-    dplyr::summarise(
-      LE_CORR = mean(LE_CORR),
-      LE_CORR_25 = mean(LE_CORR_25),
-      LE_CORR_75 = mean(LE_CORR_75)
-    ) %>%
-    # Filter out NA edge cases from the interpolation.
-    stats::na.omit()
+  if (avg_daily) {
+    joined %>%
+      dplyr::group_by(day) %>%
+      dplyr::summarise(
+        LE_CORR = mean(LE_CORR),
+        LE_CORR_25 = mean(LE_CORR_25),
+        LE_CORR_75 = mean(LE_CORR_75)
+      ) %>%
+      # Filter out NA edge cases from the interpolation.
+      stats::na.omit() %>%
+      return()
+  } else {
+    return(joined)
+  }
 }
