@@ -4,11 +4,18 @@
 #' @importFrom rlang .data
 #' @param f Path to .csv file.
 #'
-#' @return  Data frame containing timeseries of latent heat flux values.
+#' @return  Data frame containing timeseries of latent heat flux values with
+#'   low quality data removed.
 #' @export
 #'
 #' @examples
-#' clean_le('http://files.ntsg.umt.edu/data/colin_data/fluxcleanr/hh_ex.csv')
+#' \dontrun{
+#' f <- system.file('extdata',
+#'   "FLX_AR-SLu_FLUXNET2015_FULLSET_HH_2009-2011_1-4.csv",
+#'   package='fluxcleanr'
+#')
+#' clean_le(f)
+#' }
 clean_le <- function(f) {
 
   f %>%

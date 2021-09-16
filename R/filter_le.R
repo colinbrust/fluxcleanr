@@ -1,16 +1,24 @@
 
-#' Filter out missing latent heat flux such that all data from all flux towers have at least 2 years of complete data.
+#' Filter out missing latent heat flux such and linearly interpolate missing
+#'   values.
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #' @param dat data frame containing filtered flux data for a single tower.
 #' @param hh boolean - is the data half-hourly (TRUE), or hourly (FALSE)?
+#' @param avg_daily boolean - average latent heat flux values to a daily timestep (TRUE) or keep the values at half-hourly intervals (FALSE)
 #'
 #' @return  Data frame where daily missing values are gap filled and
 #' @export
 #'
 #' @examples
-#' # Add acual example with dummy data
-#' sum(1, 2)
+#' \dontrun{
+#' #' f <- system.file('extdata',
+#'   "FLX_AR-SLu_FLUXNET2015_FULLSET_HH_2009-2011_1-4.csv",
+#'   package='fluxcleanr'
+#')
+#' cleaned <- clean_le(f)
+#' filter_le(clean)
+#' }
 filter_le <- function(dat, hh=TRUE, avg_daily=TRUE) {
 
   tmp <- dat %>%

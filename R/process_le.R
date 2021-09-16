@@ -11,8 +11,9 @@
 #' @export
 #'
 #' @examples
-#' # Add acual example with dummy data
-#' sum(1, 2)
+#' \dontrun{
+#' process_le('path/to/flux/dir', '/path/to/save/dir', avg_daily = TRUE)
+#' }
 process_le <- function(flux_dir, out_dir, avg_daily=TRUE) {
   list.files(flux_dir, full.names = TRUE, pattern = 'FULLSET') %>%
     grep('_HR_|_HH_', ., value = TRUE) %>%

@@ -27,19 +27,28 @@ You can install fluxcleanr with:
 ``` r
 devtools::install_github("colinbrust/fluxcleanr")
 ```
-  
-And the development version from [GitHub](https://github.com/) with:
-
-``` r
-# install.packages("devtools")
-devtools::install_github("colinbrust/fluxcleanr")
-```
 ## Example
 
 This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
 library(fluxcleanr)
-## basic example code
+library(ggplot2)
+
+# Get path to example flux data.
+f <- system.file('extdata',
+                 "FLX_AR-SLu_FLUXNET2015_FULLSET_HH_2009-2011_1-4.csv",
+                 package='fluxcleanr')
+
+# Remove low quality data and tidy data frame
+cleaned <- clean_le(f)
+
+# Gap-fill missing values 
+filtered <- filter_le(cleaned, hh= TRUE, avg_daily = TRUE)
+
+# Plot the results.
+ggplot(filtered, aes(x=day, y=LE_CORR)) + 
+  geom_line() + 
+  theme_minimal()
 ```
 
